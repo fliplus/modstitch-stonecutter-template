@@ -1,8 +1,9 @@
 {
   "required": true,
-  "package": "com.example.mixin",
+  "package": "com.example.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
