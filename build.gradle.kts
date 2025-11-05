@@ -29,13 +29,42 @@ modstitch {
         mappingsVersion = getProperty("deps.parchment")
     }
 
+    fun TaskContainer.registerCleanTasks(groupName: String) {
+        register("cleanClient") {
+            group = groupName
+            description = "Deletes the run/client directory."
+            delete("run/client")
+        }
+        register("cleanServer") {
+            group = groupName
+            description = "Deletes the run/server directory."
+            delete("run/server")
+        }
+    }
+
     loom {
         fabricLoaderVersion = getProperty("deps.fabric-loader")
+
+        configureLoom {
+            runs {
+                named("client") { runDir("run/client") }
+                named("server") { runDir("run/server") }
+            }
+            tasks { registerCleanTasks("fabric") }
+        }
     }
 
     moddevgradle {
         neoForgeVersion = getProperty("deps.neoforge")
+
         defaultRuns()
+        configureNeoForge {
+            runs {
+                named("client") { gameDirectory = layout.projectDirectory.dir("run/client") }
+                named("server") { gameDirectory = layout.projectDirectory.dir("run/server") }
+            }
+            tasks { registerCleanTasks("mod development") }
+        }
     }
 
     mixin {
