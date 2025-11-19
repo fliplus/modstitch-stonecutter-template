@@ -11,7 +11,7 @@ modstitch {
 
     metadata {
         modId = getProperty("mod.id")
-        modVersion = getProperty("mod.version")
+        modVersion = "${getProperty("mod.version")}+${stonecutter.current.version}-${loader}"
         modGroup = getProperty("mod.group")
         modName = getProperty("mod.name")
         modDescription = getProperty("mod.description")
