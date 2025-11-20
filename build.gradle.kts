@@ -30,12 +30,12 @@ modstitch {
     }
 
     fun TaskContainer.registerCleanTasks(groupName: String) {
-        register("cleanClient") {
+        register<Delete>("cleanClient") {
             group = groupName
             description = "Deletes the run/client directory."
             delete("run/client")
         }
-        register("cleanServer") {
+        register<Delete>("cleanServer") {
             group = groupName
             description = "Deletes the run/server directory."
             delete("run/server")
