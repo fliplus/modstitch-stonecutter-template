@@ -69,7 +69,7 @@ modstitch {
 
     mixin {
         addMixinsToModManifest = true
-        configs.register(getProperty("mod.id").orEmpty())
+        configs.register(getProperty("mod.id").toString())
     }
 
     if (loader == "vanilla") modLoaderManifest = "fabric.vanilla.json"
@@ -85,12 +85,12 @@ stonecutter {
 
 dependencies {
     if (loader == "fabric") {
-        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${getProperty("deps.fabric-api").orEmpty()}")
+        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${getProperty("deps.fabric-api")}")
         getProperty("deps.modmenu")?.takeIf { it.isNotBlank() }?.let {
             modstitchModImplementation("com.terraformersmc:modmenu:$it")
         }
     }
 
     val devAuthLoader = loader.takeIf { it != "vanilla" } ?: "fabric"
-    modstitchRuntimeOnly("me.djtheredstoner:DevAuth-$devAuthLoader:${getProperty("deps.devauth").orEmpty()}")
+    modstitchRuntimeOnly("me.djtheredstoner:DevAuth-$devAuthLoader:${getProperty("deps.devauth")}")
 }
