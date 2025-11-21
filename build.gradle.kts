@@ -94,3 +94,9 @@ dependencies {
     val devAuthLoader = loader.takeIf { it != "vanilla" } ?: "fabric"
     modstitchRuntimeOnly("me.djtheredstoner:DevAuth-$devAuthLoader:${getProperty("deps.devauth")}")
 }
+
+afterEvaluate {
+    if (loader == "vanilla") {
+        tasks.findByName("compileJava")?.enabled = false
+    }
+}
